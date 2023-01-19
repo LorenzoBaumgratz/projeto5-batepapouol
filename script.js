@@ -7,7 +7,7 @@ let y=document.querySelector('.conteudo');
 
 function respostaChat(resposta){
     console.log(resposta);
-    
+    y.innerHTML='';
     for(let i=0; i<resposta.data.length;i++){
 
         let horario=resposta.data[i].time;
@@ -15,6 +15,7 @@ function respostaChat(resposta){
         let to=resposta.data[i].to;
         let txt=resposta.data[i].text;
 
+        
         
         if(resposta.data[i].type=='status'){
     
@@ -49,12 +50,16 @@ function respostaChat(resposta){
             `
             }
         }
+        
     }
-    y.innerHTML+=`<div class="auxiliar"> </div>`
-    document.querySelectorAll(".auxiliar").scrollIntoView();
+
+    y.innerHTML+=`<div class="auxiliar"> </div>`;
+    document.querySelector(".auxiliar").scrollIntoView(true);
+   
 }
 
 function entrarSala(){
+    MeuNomeOBJ={name:MeuNomeprompt};
     const promise=axios.post('https://mock-api.driven.com.br/api/v6/uol/participants',MeuNomeOBJ);
     promise.then(Continua);
     promise.catch(nomeExistente);
@@ -70,17 +75,24 @@ function ficarLogado(){
 }
 
 function nomeExistente(x){
-    console.log(x);
-    MeuNome=prompt("Nome existente,tente novamente");
+    MeuNomeprompt=prompt("Nome existente,tente novamente");
     entrarSala();
 }
 
 function enviarMsg(){
-    axios.post('https://mock-api.driven.com.br/api/v6/uol/messages',)
+    let inputTXT=document.querySelector("input").value;
+    console.log(inputTXT);
+    let send={
+        from: MeuNomeprompt,
+        to: "Todos",
+        text: inputTXT,
+        type: "message" // ou "private_message" para o bônus
+    }
+    axios.post('https://mock-api.driven.com.br/api/v6/uol/messages',send)
 }
 
-const MeuNomeprompt=prompt('Qual o seu nome?');
-const MeuNomeOBJ={name:MeuNomeprompt};
+let MeuNomeprompt=prompt('Qual o seu nome?');
+let MeuNomeOBJ;
 
 entrarSala();
 

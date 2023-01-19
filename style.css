@@ -72,6 +72,11 @@ input{
     border: 0px solid;
 }
 
+button{
+    border: 0px solid; 
+    background-color: white;
+}
+
 input:focus{
     outline: none;
 }
@@ -84,7 +89,6 @@ span{
     text-align: justify;
     font-size: 14px;
     font-weight: 400;
-    
 }
 
 .texto{
