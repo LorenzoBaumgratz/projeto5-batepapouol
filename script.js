@@ -72,11 +72,16 @@ function Continua(resposta){
 
 function ficarLogado(){
     axios.post('https://mock-api.driven.com.br/api/v6/uol/status',MeuNomeOBJ);
+    axios.catch(recarregar);
 }
 
 function nomeExistente(x){
     MeuNomeprompt=prompt("Nome existente,tente novamente");
     entrarSala();
+}
+
+function recarregar(resposta){
+    location.reload(true);
 }
 
 function enviarMsg(){
